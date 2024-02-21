@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/requests/login_request.dart';
 import 'package:frontend/response/response.dart';
 import 'package:frontend/screens/auth/registration.dart';
-import 'package:frontend/screens/journey/journey.dart';
+import 'package:frontend/screens/misc/home.dart';
 import 'package:frontend/services/di_registration.dart';
 import 'package:frontend/services/implementations/user_service_impl.dart';
 
@@ -91,7 +91,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const Journey()),
+                                    builder: (context) => const HomeScreen()),
                               );
                             } else {
                               setState(() {
