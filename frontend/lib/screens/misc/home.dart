@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/screens/journey/journey_list.dart';
 import 'package:frontend/screens/location.dart';
 import 'package:frontend/screens/user/my_profile_screen.dart';
+import 'package:frontend/screens/user/travel_buddies_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -16,7 +17,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     List<Widget> _widgetOptions = <Widget>[
       JourneyListScreen(),
-      Text("Dummy"),
+      TravelBuddiesList(),
       MyProfileScreen()
     ];
 

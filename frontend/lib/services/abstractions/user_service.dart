@@ -7,4 +7,7 @@ abstract class UserService {
   Future<Response<User>> login(LoginRequest request);
   Future<Response<bool>> register(RegisterRequest request);
   Future<Response<List<User>>> getAllJourneyParticipants(int journeyId);
+  Future<Response<List<User>>> getAllTravelBuddies();
+  Future<Response<List<User>>> search(String keyword);
+  Future<Response<bool>> becomeTravelBuddy(int id);
 }

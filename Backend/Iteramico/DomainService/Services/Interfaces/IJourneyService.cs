@@ -8,5 +8,6 @@ namespace DomainService.Services.Interfaces
     {
         public Task<Response<List<JourneyParticipation>>> GetJourneysByUserId(int userId);
         public Task<Response<Journey>> GetJourneyById(int id);
+        public Task<Response<object>> AddJourneyParticipation(int journeyId, int userId);
     }
 }

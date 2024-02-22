@@ -7,4 +7,6 @@ abstract class JourneyService {
       int userId);
 
   Future<Response<Journey>> getJourneyById(int id);
+
+  Future<Response<bool>> addJourneyParticipation(int userId);
 }

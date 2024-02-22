@@ -22,5 +22,11 @@ namespace DomainAPI.Controllers
         {
             return await _journeyService.GetJourneysByUserId(userId);
         }
+
+        [HttpGet("add-participation/{journeyId:int}/{userId:int}")]
+        public async Task<Response<object>> AddJourneyParticipation(int journeyId, int userId)
+        {
+            return await _journeyService.AddJourneyParticipation(journeyId, userId);
+        }
     }
 }
