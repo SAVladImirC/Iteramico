@@ -24,5 +24,11 @@ namespace DomainAPI.Controllers
         {
             return await _userService.Login(request);
         }
+
+        [HttpGet("by-journey/{journeyId:int}")]
+        public async Task<Response<List<User>>> GetAllJourneyParticipants(int journeyId)
+        {
+            return await _userService.GetAllJourneyParticipants(journeyId);
+        }
     }
 }

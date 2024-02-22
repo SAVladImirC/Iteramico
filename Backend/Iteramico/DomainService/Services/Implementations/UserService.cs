@@ -64,5 +64,18 @@ namespace DomainService.Services.Implementations
                 return new ErrorResponse<User>("EE100", message: e.Message);
             }
         }
+
+        public async Task<Response<List<User>>> GetAllJourneyParticipants(int journeyId)
+        {
+            try
+            {
+                List<User> participants = await _userRepository.FindAll(u => u.Participations.Any(p => p.JourneyId == journeyId));
+                return new Response<List<User>>(participants, "Journey participants retrieved succesffully");
+            }
+            catch(Exception e)
+            {
+                return new ErrorResponse<List<User>>("EE100", message: e.Message);
+            }
+        }
     }
 }

@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/models/event.dart';
 import 'package:frontend/screens/event/event.dart';
+import 'package:frontend/screens/event/event_create_dialog.dart';
+import 'package:frontend/services/di_registration.dart';
+import 'package:frontend/services/implementations/event_service_impl.dart';
+import 'package:frontend/services/implementations/journey_service_impl.dart';
 
 class EventList extends StatefulWidget {
   final List<Event> events;
@@ -12,18 +16,40 @@ class EventList extends StatefulWidget {
 }
 
 class _EventListState extends State<EventList> {
-  late final List<Event> _events;
+  EventServiceImpl _eventService = getIt<EventServiceImpl>();
+  JourneyServiceImpl _journeyService = getIt<JourneyServiceImpl>();
+
+  List<Event>? _events;
 
   @override
   void initState() {
     super.initState();
-    _events = widget.events;
+    _fetchEvents();
+  }
+
+  Future<void> _fetchEvents() async {
+    var response = await _eventService
+        .getAllEventsForJourney(_journeyService.currentJourney.id);
+    setState(() {
+      _events = response.data;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: _buildEventList(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AddEventDialog();
+            },
+          ).then((value) => _fetchEvents());
+        },
+        child: const Icon(Icons.add),
+      ),
     );
   }
 
@@ -33,7 +59,7 @@ class _EventListState extends State<EventList> {
       return const Center(
         child: CircularProgressIndicator(),
       );
-    } else if (_events.isEmpty) {
+    } else if (_events!.isEmpty) {
       // Show message if no journeys available
       return const Center(
         child: Text('No events available. You can always add one!'),
@@ -54,9 +80,9 @@ class _EventListState extends State<EventList> {
           ),
           Expanded(
             child: ListView.builder(
-              itemCount: _events.length,
+              itemCount: _events!.length,
               itemBuilder: (context, index) {
-                return EventWidget(event: _events[index]);
+                return EventWidget(event: _events![index]);
               },
             ),
           ),

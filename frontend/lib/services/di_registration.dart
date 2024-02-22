@@ -1,5 +1,7 @@
+import 'package:frontend/services/implementations/event_service_impl.dart';
 import 'package:frontend/services/implementations/journey_service_impl.dart';
 import 'package:frontend/services/implementations/memory_service_impl.dart';
+import 'package:frontend/services/implementations/reminder_service_impl.dart';
 import 'package:frontend/services/implementations/user_service_impl.dart';
 import 'package:get_it/get_it.dart';
 
@@ -9,4 +11,6 @@ void setup() {
   getIt.registerLazySingleton<UserServiceImpl>(() => UserServiceImpl());
   getIt.registerLazySingleton<JourneyServiceImpl>(() => JourneyServiceImpl());
   getIt.registerLazySingleton<MemoryServiceImpl>(() => MemoryServiceImpl());
+  getIt.registerLazySingleton<EventServiceImpl>(() => EventServiceImpl());
+  getIt.registerLazySingleton<ReminderServiceImpl>(() => ReminderServiceImpl());
 }

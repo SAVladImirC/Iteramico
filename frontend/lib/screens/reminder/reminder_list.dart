@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/models/reminder.dart';
 import 'package:frontend/screens/reminder/reminder.dart';
+import 'package:frontend/screens/reminder/reminder_create_dialog.dart';
+import 'package:frontend/services/di_registration.dart';
+import 'package:frontend/services/implementations/journey_service_impl.dart';
+import 'package:frontend/services/implementations/reminder_service_impl.dart';
 
 class ReminderList extends StatefulWidget {
   final List<Reminder> reminders;
@@ -12,18 +16,40 @@ class ReminderList extends StatefulWidget {
 }
 
 class _ReminderListState extends State<ReminderList> {
-  late final List<Reminder> _reminders;
+  ReminderServiceImpl _reminderService = getIt<ReminderServiceImpl>();
+  JourneyServiceImpl _journeyService = getIt<JourneyServiceImpl>();
+
+  List<Reminder>? _reminders;
 
   @override
   void initState() {
     super.initState();
-    _reminders = widget.reminders;
+    _fetchReminders();
+  }
+
+  Future<void> _fetchReminders() async {
+    var response = await _reminderService
+        .getAllRemindersForJourney(_journeyService.currentJourney.id);
+    setState(() {
+      _reminders = response.data;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: _buildReminderList(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AddReminderDialog();
+            },
+          ).then((value) => _fetchReminders());
+        },
+        child: const Icon(Icons.add),
+      ),
     );
   }
 
@@ -33,7 +59,7 @@ class _ReminderListState extends State<ReminderList> {
       return const Center(
         child: CircularProgressIndicator(),
       );
-    } else if (_reminders.isEmpty) {
+    } else if (_reminders!.isEmpty) {
       // Show message if no journeys available
       return const Center(
         child: Text('No reminders available. You can always add one!'),
@@ -54,9 +80,9 @@ class _ReminderListState extends State<ReminderList> {
           ),
           Expanded(
             child: ListView.builder(
-              itemCount: _reminders.length,
+              itemCount: _reminders!.length,
               itemBuilder: (context, index) {
-                return ReminderWidget(reminder: _reminders[index]);
+                return ReminderWidget(reminder: _reminders![index]);
               },
             ),
           ),

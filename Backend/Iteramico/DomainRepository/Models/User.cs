@@ -18,5 +18,8 @@
         public virtual List<ExpenseParticipation> Pays { get; set; } = [];
 
         public virtual List<Reminder> Reminders { get; set; } = [];
+
+        public virtual List<TravelBuddy> TravelBuddies { get; set; } = [];
+        public virtual List<TravelBuddy> BuddiesOf { get; set; } = [];
     }
 }

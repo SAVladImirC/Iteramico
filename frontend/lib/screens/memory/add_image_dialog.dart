@@ -7,7 +7,6 @@ import 'package:frontend/services/di_registration.dart';
 import 'package:frontend/services/implementations/journey_service_impl.dart';
 import 'package:frontend/services/implementations/memory_service_impl.dart';
 import 'package:frontend/services/implementations/user_service_impl.dart';
-import 'package:http/http.dart';
 
 class AddImageDialog extends StatefulWidget {
   final File imageFile;

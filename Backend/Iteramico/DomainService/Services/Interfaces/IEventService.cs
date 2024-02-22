@@ -1,9 +1,12 @@
 ﻿using DomainRepository.Models;
-using General.Service;
+using DomainService.Requests.Event;
+using General.Response;
 
 namespace DomainService.Services.Interfaces
 {
-    public interface IEventService : IGeneralService<Event>
+    public interface IEventService
     {
+        public Task<Response<Event>> CreateEvent(CreateEventRequest request);
+        public Task<Response<List<Event>>> GetAllEventsForJourney(int journeyId);
     }
 }

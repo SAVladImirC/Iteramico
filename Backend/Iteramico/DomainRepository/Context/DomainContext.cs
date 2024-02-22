@@ -16,6 +16,7 @@ namespace DomainRepository.Context
         public DbSet<Reminder> Reminders { get; set; }
         public DbSet<Expense> Expenses { get; set; }
         public DbSet<Memory> Memories { get; set; }
+        public DbSet<TravelBuddy> TravelBuddies { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -34,6 +35,7 @@ namespace DomainRepository.Context
             new ReminderConfiguration().Configure(modelBuilder.Entity<Reminder>());
             new ExpenseConfiguration().Configure(modelBuilder.Entity<Expense>());
             new MemoryConfiguration().Configure(modelBuilder.Entity<Memory>());
+            new TravelBuddyConfiguration().Configure(modelBuilder.Entity<TravelBuddy>());
         }
     }
 }

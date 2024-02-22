@@ -6,4 +6,5 @@ import 'package:frontend/response/response.dart';
 abstract class UserService {
   Future<Response<User>> login(LoginRequest request);
   Future<Response<bool>> register(RegisterRequest request);
+  Future<Response<List<User>>> getAllJourneyParticipants(int journeyId);
 }

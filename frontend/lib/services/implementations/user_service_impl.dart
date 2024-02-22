@@ -75,4 +75,36 @@ class UserServiceImpl implements UserService {
       return Response(data: false, message: "Unknown error", errorCode: "E000");
     }
   }
+
+  @override
+  Future<Response<List<User>>> getAllJourneyParticipants(int journeyId) async {
+    try {
+      var response = await http.get(
+          Uri.parse("$baseUrl:7012/api/user/by-journey/$journeyId"),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+          });
+      if (response.statusCode == 200) {
+        Map<String, dynamic> decoded = jsonDecode(response.body);
+        if (decoded.containsKey("errorCode")) {
+          return Response(
+              data: null,
+              message: decoded['message'],
+              errorCode: decoded['errorCode']);
+        } else {
+          List<User> participants =
+              decoded['data'].map<User>((json) => User.fromJson(json)).toList();
+          return Response(
+              data: participants, errorCode: null, message: decoded['message']);
+        }
+      } else {
+        return Response(
+            data: null,
+            message: "Error during http request",
+            errorCode: "E400");
+      }
+    } catch (e) {
+      return Response(data: null, message: "Unknown error", errorCode: "E000");
+    }
+  }
 }
