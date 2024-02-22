@@ -1,16 +1,14 @@
-# frontend
+# Iteramico frontend
 
-A new Flutter project.
+Крос-платформска апликација изградена со Flutter
 
-## Getting Started
+## Стартување
 
-This project is a starting point for a Flutter application.
+Доколку backend-от е успешно конфигураран и стартуван, се што е потребно е инсталиран emulator.
 
-A few resources to get you started if this is your first Flutter project:
+Се стартува emulator,
+Потоа се стартува апликацијата
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+За најавување во апликацијата првин треба да се регистрира корисник.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+После тоа се најавува.
