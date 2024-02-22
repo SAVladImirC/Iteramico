@@ -1,9 +1,12 @@
 ﻿using DomainRepository.Models;
-using General.Service;
+using DomainService.Requests.Memory;
+using General.Response;
 
 namespace DomainService.Services.Interfaces
 {
-    public interface IMemoryService : IGeneralService<Memory>
+    public interface IMemoryService
     {
+        public Task<Response<Memory>> CreateMemory(MemoryCreateRequest request);
+        public Task<Response<List<Memory>>> GetAllMemoriesForJourney(int journeyId);
     }
 }

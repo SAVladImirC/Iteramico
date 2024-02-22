@@ -9,16 +9,17 @@ import 'package:http/http.dart' as http;
 
 class UserServiceImpl implements UserService {
   late final User currentUser;
+  final String baseUrl = "https://10.0.2.2";
+  //final String baseUrl = "http://192.168.0.104";
 
   @override
   Future<Response<User>> login(LoginRequest request) async {
     try {
-      var response =
-          await http.post(Uri.parse("http://192.168.0.104:7012/api/user/login"),
-              headers: <String, String>{
-                'Content-Type': 'application/json; charset=UTF-8',
-              },
-              body: jsonEncode(request.toJson()));
+      var response = await http.post(Uri.parse("$baseUrl:7012/api/user/login"),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+          },
+          body: jsonEncode(request.toJson()));
       if (response.statusCode == 200) {
         Map<String, dynamic> decoded = jsonDecode(response.body);
         if (decoded.containsKey("errorCode")) {
@@ -47,12 +48,12 @@ class UserServiceImpl implements UserService {
   @override
   Future<Response<bool>> register(RegisterRequest request) async {
     try {
-      var response = await http.post(
-          Uri.parse("http://192.168.0.104:7012/api/user/register"),
-          headers: <String, String>{
-            'Content-Type': 'application/json; charset=UTF-8',
-          },
-          body: jsonEncode(request.toJson()));
+      var response =
+          await http.post(Uri.parse("$baseUrl:7012/api/user/register"),
+              headers: <String, String>{
+                'Content-Type': 'application/json; charset=UTF-8',
+              },
+              body: jsonEncode(request.toJson()));
       if (response.statusCode == 200) {
         Map<String, dynamic> decoded = jsonDecode(response.body);
         if (decoded.containsKey("errorCode")) {

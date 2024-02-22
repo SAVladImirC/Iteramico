@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/models/memory.dart';
-import 'package:frontend/screens/memory/add_image_dialog.dart';
 import 'package:frontend/screens/memory/camera.dart';
+import 'package:frontend/screens/memory/memory.dart';
+import 'package:frontend/services/di_registration.dart';
+import 'package:frontend/services/implementations/journey_service_impl.dart';
+import 'package:frontend/services/implementations/memory_service_impl.dart';
 
 class MemoryList extends StatefulWidget {
   final List<Memory> memories;
@@ -13,12 +16,23 @@ class MemoryList extends StatefulWidget {
 }
 
 class _MemoryListState extends State<MemoryList> {
-  late final List<Memory> _memories;
+  MemoryServiceImpl _memoryService = getIt<MemoryServiceImpl>();
+  JourneyServiceImpl _journeyService = getIt<JourneyServiceImpl>();
+
+  List<Memory>? _memories;
 
   @override
   void initState() {
     super.initState();
-    _memories = widget.memories;
+    _fetchMemories();
+  }
+
+  Future<void> _fetchMemories() async {
+    var response = await _memoryService
+        .getAllMemoriesForJourney(_journeyService.currentJourney.id);
+    setState(() {
+      _memories = response.data;
+    });
   }
 
   @override
@@ -30,7 +44,7 @@ class _MemoryListState extends State<MemoryList> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => CameraScreen(),
+              builder: (context) => const CameraScreen(),
             ),
           );
         },
@@ -45,7 +59,7 @@ class _MemoryListState extends State<MemoryList> {
       return const Center(
         child: CircularProgressIndicator(),
       );
-    } else if (_memories.isEmpty) {
+    } else if (_memories!.isEmpty) {
       // Show message if no journeys available
       return const Center(
         child: Text('No memories available. You can always add one!'),
@@ -57,7 +71,7 @@ class _MemoryListState extends State<MemoryList> {
           const Padding(
             padding: EdgeInsets.symmetric(vertical: 16.0),
             child: Text(
-              'memories',
+              'Memories',
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
@@ -66,9 +80,9 @@ class _MemoryListState extends State<MemoryList> {
           ),
           Expanded(
             child: ListView.builder(
-              itemCount: _memories.length,
+              itemCount: _memories!.length,
               itemBuilder: (context, index) {
-                //return memoryWidget(memory: _memories[index]);
+                return MemoryWidget(memory: _memories![index]);
               },
             ),
           ),

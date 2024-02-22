@@ -60,6 +60,7 @@ class _JourneyDetailsState extends State<JourneyDetails> {
     var response = await _journeyService.getJourneyById(_journeyId);
     setState(() {
       _journey = response.data!;
+      _journeyService.currentJourney = _journey!;
       screens = [
         MemoryList(memories: []),
         ReminderList(reminders: _journey?.reminders ?? []),

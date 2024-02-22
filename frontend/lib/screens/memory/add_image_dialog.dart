@@ -1,6 +1,13 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:frontend/requests/memory_create_request.dart';
+import 'package:frontend/services/di_registration.dart';
+import 'package:frontend/services/implementations/journey_service_impl.dart';
+import 'package:frontend/services/implementations/memory_service_impl.dart';
+import 'package:frontend/services/implementations/user_service_impl.dart';
+import 'package:http/http.dart';
 
 class AddImageDialog extends StatefulWidget {
   final File imageFile;
@@ -8,10 +15,15 @@ class AddImageDialog extends StatefulWidget {
   const AddImageDialog({Key? key, required this.imageFile}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _AddImageDialogState createState() => _AddImageDialogState();
 }
 
 class _AddImageDialogState extends State<AddImageDialog> {
+  final MemoryServiceImpl _memoryService = getIt<MemoryServiceImpl>();
+  final JourneyServiceImpl _journeyService = getIt<JourneyServiceImpl>();
+  final UserServiceImpl _userServiceImpl = getIt<UserServiceImpl>();
+
   late TextEditingController _nameController;
 
   @override
@@ -29,7 +41,7 @@ class _AddImageDialogState extends State<AddImageDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text('Add Image'),
+      title: const Text('Add Image'),
       content: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -37,9 +49,9 @@ class _AddImageDialogState extends State<AddImageDialog> {
           children: [
             TextField(
               controller: _nameController,
-              decoration: InputDecoration(labelText: 'Image Name'),
+              decoration: const InputDecoration(labelText: 'Image Name'),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Image.file(widget.imageFile),
           ],
         ),
@@ -49,15 +61,24 @@ class _AddImageDialogState extends State<AddImageDialog> {
           onPressed: () {
             Navigator.of(context).pop();
           },
-          child: Text('Cancel'),
+          child: const Text('Cancel'),
         ),
         ElevatedButton(
-          onPressed: () {
-            final imageName = _nameController.text;
-            // Implement logic to save the memory with the image and name
+          onPressed: () async {
+            final name = _nameController.text;
+            List<int> imageBytes = await widget.imageFile.readAsBytes();
+            MemoryCreateRequest request = MemoryCreateRequest(
+                base64image: base64Encode(imageBytes),
+                name: name,
+                creatorId: _userServiceImpl.currentUser.id,
+                journeyId: _journeyService.currentJourney.id);
+
+            await _memoryService.create(request);
+
+            // ignore: use_build_context_synchronously
             Navigator.of(context).pop();
           },
-          child: Text('Save'),
+          child: const Text('Save'),
         ),
       ],
     );

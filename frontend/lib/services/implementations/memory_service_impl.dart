@@ -1,27 +1,25 @@
 import 'dart:convert';
 
-import 'package:frontend/models/journey.dart';
-import 'package:frontend/models/journey_participation.dart';
-import 'package:frontend/response/response.dart';
-import 'package:frontend/services/abstractions/journey_service.dart';
-
+import 'package:frontend/requests/memory_create_request.dart';
 import 'package:http/http.dart' as http;
 
-class JourneyServiceImpl implements JourneyService {
-  late Journey currentJourney;
+import 'package:frontend/models/memory.dart';
+import 'package:frontend/response/response.dart';
+import 'package:frontend/services/abstractions/memory_service.dart';
 
+class MemoryServiceImpl extends MemoryService {
   final String baseUrl = "https://10.0.2.2";
   //final String baseUrl = "http://192.168.0.104";
 
   @override
-  Future<Response<List<JourneyParticipation>>> getAllJourneysForUser(
-      int userId) async {
+  Future<Response<Memory>> create(MemoryCreateRequest request) async {
     try {
-      var response = await http.get(
-          Uri.parse("$baseUrl:7012/api/journey/by-user/$userId"),
-          headers: <String, String>{
-            'Content-Type': 'application/json; charset=UTF-8',
-          });
+      var response =
+          await http.post(Uri.parse("$baseUrl:7012/api/memory/create"),
+              headers: <String, String>{
+                'Content-Type': 'application/json; charset=UTF-8',
+              },
+              body: jsonEncode(request.toJson()));
       if (response.statusCode == 200) {
         Map<String, dynamic> decoded = jsonDecode(response.body);
         if (decoded.containsKey("errorCode")) {
@@ -30,14 +28,8 @@ class JourneyServiceImpl implements JourneyService {
               message: decoded['message'],
               errorCode: decoded['errorCode']);
         } else {
-          List<JourneyParticipation> participations = decoded['data']
-              .map<JourneyParticipation>(
-                  (json) => JourneyParticipation.fromJson(json))
-              .toList();
           return Response(
-              data: participations,
-              errorCode: null,
-              message: decoded['message']);
+              data: null, message: decoded['message'] ?? "", errorCode: null);
         }
       } else {
         return Response(
@@ -51,10 +43,10 @@ class JourneyServiceImpl implements JourneyService {
   }
 
   @override
-  Future<Response<Journey>> getJourneyById(int id) async {
+  Future<Response<List<Memory>>> getAllMemoriesForJourney(int journeyId) async {
     try {
       var response = await http.get(
-          Uri.parse("$baseUrl:7012/api/journey/by-id/$id"),
+          Uri.parse("$baseUrl:7012/api/memory/$journeyId"),
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
           });
@@ -66,9 +58,13 @@ class JourneyServiceImpl implements JourneyService {
               message: decoded['message'],
               errorCode: decoded['errorCode']);
         } else {
-          Journey journey = Journey.fromJson(decoded['data']);
+          List<Memory> participations = decoded['data']
+              .map<Memory>((json) => Memory.fromJson(json))
+              .toList();
           return Response(
-              data: journey, errorCode: null, message: decoded['message']);
+              data: participations,
+              errorCode: null,
+              message: decoded['message']);
         }
       } else {
         return Response(

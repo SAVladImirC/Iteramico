@@ -19,7 +19,7 @@ namespace DomainRepository.Configuration
                 .WithMany(j => j.Memories);
 
             builder.Property(m => m.Name).HasMaxLength(100);
-            builder.Property(m => m.ImagePath).HasMaxLength(100);
+            builder.Property(m => m.ImageBase64).HasMaxLength(10000);
         }
     }
 }
