@@ -18,7 +18,7 @@ namespace DomainRepository.Configuration
             
             builder
                 .HasOne(r => r.Journey)
-                .WithMany()
+                .WithMany(j => j.Reminders)
                 .HasForeignKey(r => r.JourneyId);
 
             builder

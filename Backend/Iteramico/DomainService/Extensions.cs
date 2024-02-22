@@ -1,6 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using UserManagementService.Services.Implementations;
-using UserManagementService.Services.Interfaces;
+﻿using DomainService.Services.Implementations;
+using DomainService.Services.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace DomainService
 {
@@ -9,6 +9,10 @@ namespace DomainService
         public static IServiceCollection RegisterDomainServices(this IServiceCollection services)
         {
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IMemoryService, MemoryService>();
+            services.AddTransient<IReminderService, ReminderService>();
+            services.AddTransient<IEventService, EventService>();
+            services.AddTransient<IJourneyService, JourneyService>();
 
             return services;
         }

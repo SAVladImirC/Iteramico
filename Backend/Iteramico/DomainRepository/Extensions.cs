@@ -18,6 +18,7 @@ namespace DomainRepository
                     {
                         sqlOptions.EnableRetryOnFailure();
                     });
+                c.UseLazyLoadingProxies();
                 c.EnableDetailedErrors();
                 c.EnableSensitiveDataLogging();
             });
@@ -27,6 +28,11 @@ namespace DomainRepository
         public static IServiceCollection RegisterDomainRepositories(this IServiceCollection services)
         {
             services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IJourneyRepository, JourneyRepository>();
+            services.AddTransient<IReminderRepository, ReminderRepository>();
+            services.AddTransient<IMemoryRepository, MemoryRepository>();
+            services.AddTransient<IEventRepository, EventRepository>();
+            services.AddTransient<IJourneyParticipationRepository, JourneyParticipationRepository>();
 
             return services;
         }

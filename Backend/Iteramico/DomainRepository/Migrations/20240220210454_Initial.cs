@@ -12,7 +12,7 @@ namespace DomainRepository.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Country",
+                name: "Countries",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -23,11 +23,11 @@ namespace DomainRepository.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Country", x => x.Id);
+                    table.PrimaryKey("PK_Countries", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "User",
+                name: "Users",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -41,11 +41,11 @@ namespace DomainRepository.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_User", x => x.Id);
+                    table.PrimaryKey("PK_Users", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "City",
+                name: "Cities",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -56,11 +56,11 @@ namespace DomainRepository.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_City", x => x.Id);
+                    table.PrimaryKey("PK_Cities", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_City_Country_CountryId",
+                        name: "FK_Cities_Countries_CountryId",
                         column: x => x.CountryId,
-                        principalTable: "Country",
+                        principalTable: "Countries",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -79,15 +79,15 @@ namespace DomainRepository.Migrations
                 {
                     table.PrimaryKey("PK_Auth", x => x.UserId);
                     table.ForeignKey(
-                        name: "FK_Auth_User_UserId",
+                        name: "FK_Auth_Users_UserId",
                         column: x => x.UserId,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Journey",
+                name: "Journeys",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -98,21 +98,21 @@ namespace DomainRepository.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Journey", x => x.Id);
+                    table.PrimaryKey("PK_Journeys", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Journey_City_ToId",
+                        name: "FK_Journeys_Cities_ToId",
                         column: x => x.ToId,
-                        principalTable: "City",
+                        principalTable: "Cities",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Journey_User_CreatorId",
+                        name: "FK_Journeys_Users_CreatorId",
                         column: x => x.CreatorId,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
-                name: "Event",
+                name: "Events",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -125,48 +125,48 @@ namespace DomainRepository.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Event", x => x.Id);
+                    table.PrimaryKey("PK_Events", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Event_Journey_JourneyId",
+                        name: "FK_Events_Journeys_JourneyId",
                         column: x => x.JourneyId,
-                        principalTable: "Journey",
+                        principalTable: "Journeys",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Event_User_CreatorId",
+                        name: "FK_Events_Users_CreatorId",
                         column: x => x.CreatorId,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
-                name: "Expense",
+                name: "Expenses",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Currency = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Currency = table.Column<string>(type: "nvarchar(3)", maxLength: 3, nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     CreatorId = table.Column<int>(type: "int", nullable: true),
                     JourneyId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Expense", x => x.Id);
+                    table.PrimaryKey("PK_Expenses", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Expense_Journey_JourneyId",
+                        name: "FK_Expenses_Journeys_JourneyId",
                         column: x => x.JourneyId,
-                        principalTable: "Journey",
+                        principalTable: "Journeys",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Expense_User_CreatorId",
+                        name: "FK_Expenses_Users_CreatorId",
                         column: x => x.CreatorId,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
-                name: "JourneyParticipation",
+                name: "JourneyParticipations",
                 columns: table => new
                 {
                     UserId = table.Column<int>(type: "int", nullable: false),
@@ -175,23 +175,50 @@ namespace DomainRepository.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_JourneyParticipation", x => new { x.UserId, x.JourneyId });
+                    table.PrimaryKey("PK_JourneyParticipations", x => new { x.UserId, x.JourneyId });
                     table.ForeignKey(
-                        name: "FK_JourneyParticipation_Journey_JourneyId",
+                        name: "FK_JourneyParticipations_Journeys_JourneyId",
                         column: x => x.JourneyId,
-                        principalTable: "Journey",
+                        principalTable: "Journeys",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_JourneyParticipation_User_UserId",
+                        name: "FK_JourneyParticipations_Users_UserId",
                         column: x => x.UserId,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Reminder",
+                name: "Memories",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    ImagePath = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    PostedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatorId = table.Column<int>(type: "int", nullable: true),
+                    JourneyId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Memories", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Memories_Journeys_JourneyId",
+                        column: x => x.JourneyId,
+                        principalTable: "Journeys",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Memories_Users_CreatorId",
+                        column: x => x.CreatorId,
+                        principalTable: "Users",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Reminders",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -204,28 +231,28 @@ namespace DomainRepository.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Reminder", x => x.Id);
+                    table.PrimaryKey("PK_Reminders", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Reminder_Journey_JourneyId",
+                        name: "FK_Reminders_Journeys_JourneyId",
                         column: x => x.JourneyId,
-                        principalTable: "Journey",
+                        principalTable: "Journeys",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Reminder_User_CreatorId",
+                        name: "FK_Reminders_Users_CreatorId",
                         column: x => x.CreatorId,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Reminder_User_ForId",
+                        name: "FK_Reminders_Users_ForId",
                         column: x => x.ForId,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "ExpenseParticipation",
+                name: "ExpenseParticipations",
                 columns: table => new
                 {
                     UserId = table.Column<int>(type: "int", nullable: false),
@@ -234,89 +261,99 @@ namespace DomainRepository.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ExpenseParticipation", x => new { x.UserId, x.ExpenseId });
+                    table.PrimaryKey("PK_ExpenseParticipations", x => new { x.UserId, x.ExpenseId });
                     table.ForeignKey(
-                        name: "FK_ExpenseParticipation_Expense_ExpenseId",
+                        name: "FK_ExpenseParticipations_Expenses_ExpenseId",
                         column: x => x.ExpenseId,
-                        principalTable: "Expense",
+                        principalTable: "Expenses",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ExpenseParticipation_User_PayerId",
+                        name: "FK_ExpenseParticipations_Users_PayerId",
                         column: x => x.PayerId,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_ExpenseParticipation_User_UserId",
+                        name: "FK_ExpenseParticipations_Users_UserId",
                         column: x => x.UserId,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_City_CountryId",
-                table: "City",
+                name: "IX_Cities_CountryId",
+                table: "Cities",
                 column: "CountryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Event_CreatorId",
-                table: "Event",
+                name: "IX_Events_CreatorId",
+                table: "Events",
                 column: "CreatorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Event_JourneyId",
-                table: "Event",
+                name: "IX_Events_JourneyId",
+                table: "Events",
                 column: "JourneyId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Expense_CreatorId",
-                table: "Expense",
-                column: "CreatorId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Expense_JourneyId",
-                table: "Expense",
-                column: "JourneyId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ExpenseParticipation_ExpenseId",
-                table: "ExpenseParticipation",
+                name: "IX_ExpenseParticipations_ExpenseId",
+                table: "ExpenseParticipations",
                 column: "ExpenseId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ExpenseParticipation_PayerId",
-                table: "ExpenseParticipation",
+                name: "IX_ExpenseParticipations_PayerId",
+                table: "ExpenseParticipations",
                 column: "PayerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Journey_CreatorId",
-                table: "Journey",
+                name: "IX_Expenses_CreatorId",
+                table: "Expenses",
                 column: "CreatorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Journey_ToId",
-                table: "Journey",
-                column: "ToId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_JourneyParticipation_JourneyId",
-                table: "JourneyParticipation",
+                name: "IX_Expenses_JourneyId",
+                table: "Expenses",
                 column: "JourneyId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Reminder_CreatorId",
-                table: "Reminder",
+                name: "IX_JourneyParticipations_JourneyId",
+                table: "JourneyParticipations",
+                column: "JourneyId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Journeys_CreatorId",
+                table: "Journeys",
                 column: "CreatorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Reminder_ForId",
-                table: "Reminder",
+                name: "IX_Journeys_ToId",
+                table: "Journeys",
+                column: "ToId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Memories_CreatorId",
+                table: "Memories",
+                column: "CreatorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Memories_JourneyId",
+                table: "Memories",
+                column: "JourneyId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Reminders_CreatorId",
+                table: "Reminders",
+                column: "CreatorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Reminders_ForId",
+                table: "Reminders",
                 column: "ForId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Reminder_JourneyId",
-                table: "Reminder",
+                name: "IX_Reminders_JourneyId",
+                table: "Reminders",
                 column: "JourneyId");
         }
 
@@ -327,31 +364,34 @@ namespace DomainRepository.Migrations
                 name: "Auth");
 
             migrationBuilder.DropTable(
-                name: "Event");
+                name: "Events");
 
             migrationBuilder.DropTable(
-                name: "ExpenseParticipation");
+                name: "ExpenseParticipations");
 
             migrationBuilder.DropTable(
-                name: "JourneyParticipation");
+                name: "JourneyParticipations");
 
             migrationBuilder.DropTable(
-                name: "Reminder");
+                name: "Memories");
 
             migrationBuilder.DropTable(
-                name: "Expense");
+                name: "Reminders");
 
             migrationBuilder.DropTable(
-                name: "Journey");
+                name: "Expenses");
 
             migrationBuilder.DropTable(
-                name: "City");
+                name: "Journeys");
 
             migrationBuilder.DropTable(
-                name: "User");
+                name: "Cities");
 
             migrationBuilder.DropTable(
-                name: "Country");
+                name: "Users");
+
+            migrationBuilder.DropTable(
+                name: "Countries");
         }
     }
 }

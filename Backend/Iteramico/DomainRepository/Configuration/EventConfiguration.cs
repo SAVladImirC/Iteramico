@@ -16,7 +16,7 @@ namespace DomainRepository.Configuration
 
             builder
                 .HasOne(e => e.Journey)
-                .WithMany();
+                .WithMany(j => j.Events);
 
             builder.Property(p => p.Name).HasMaxLength(100);
         }

@@ -6,6 +6,17 @@ namespace DomainRepository.Context
 {
     internal class DomainContext(DbContextOptions<DomainContext> options) : DbContext(options)
     {
+        public DbSet<User> Users { get; set; }
+        public DbSet<Journey> Journeys { get; set; }
+        public DbSet<JourneyParticipation> JourneyParticipations { get; set; }
+        public DbSet<City> Cities { get; set; }
+        public DbSet<Country> Countries { get; set; }
+        public DbSet<Event> Events { get; set; }
+        public DbSet<ExpenseParticipation> ExpenseParticipations { get; set; }
+        public DbSet<Reminder> Reminders { get; set; }
+        public DbSet<Expense> Expenses { get; set; }
+        public DbSet<Memory> Memories { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
@@ -21,6 +32,8 @@ namespace DomainRepository.Context
             new EventConfiguration().Configure(modelBuilder.Entity<Event>());
             new ExpenseParticipationConfiguration().Configure(modelBuilder.Entity<ExpenseParticipation>());
             new ReminderConfiguration().Configure(modelBuilder.Entity<Reminder>());
+            new ExpenseConfiguration().Configure(modelBuilder.Entity<Expense>());
+            new MemoryConfiguration().Configure(modelBuilder.Entity<Memory>());
         }
     }
 }

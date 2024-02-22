@@ -1,8 +1,8 @@
 ﻿using DomainRepository.Models;
+using DomainService.Requests.User;
 using General.Response;
-using UserManagementService.Requests.User;
 
-namespace UserManagementService.Services.Interfaces
+namespace DomainService.Services.Interfaces
 {
     public interface IUserService
     {

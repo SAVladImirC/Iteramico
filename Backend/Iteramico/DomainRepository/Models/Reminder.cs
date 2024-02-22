@@ -8,12 +8,12 @@
         public DateTime Deadline { get; set; }
 
         public int CreatorId { get; set; }
-        public User Creator { get; set; }
+        public virtual User Creator { get; set; }
 
         public int ForId { get; set; }
-        public User For { get; set; }
+        public virtual User For { get; set; }
 
         public int JourneyId { get; set; }
-        public Journey Journey { get; set; }
+        public virtual Journey Journey { get; set; }
     }
 }

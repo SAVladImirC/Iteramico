@@ -16,7 +16,7 @@ namespace DomainRepository.Configuration
 
             builder
                 .HasOne(m => m.Journey)
-                .WithMany();
+                .WithMany(j => j.Memories);
 
             builder.Property(m => m.Name).HasMaxLength(100);
             builder.Property(m => m.ImagePath).HasMaxLength(100);

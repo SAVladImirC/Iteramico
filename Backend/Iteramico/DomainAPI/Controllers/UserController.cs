@@ -1,10 +1,10 @@
 ﻿using DomainRepository.Models;
+using DomainService.Requests.User;
+using DomainService.Services.Interfaces;
 using General.Response;
 using Microsoft.AspNetCore.Mvc;
-using UserManagementService.Requests.User;
-using UserManagementService.Services.Interfaces;
 
-namespace UserManagementAPI.Controllers
+namespace DomainAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

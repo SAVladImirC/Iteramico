@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DomainRepository.Migrations
 {
     [DbContext(typeof(DomainContext))]
-    [Migration("20240217130353_Initial")]
+    [Migration("20240220210454_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -48,7 +48,7 @@ namespace DomainRepository.Migrations
 
                     b.HasIndex("CountryId");
 
-                    b.ToTable("City");
+                    b.ToTable("Cities");
                 });
 
             modelBuilder.Entity("DomainRepository.Models.Country", b =>
@@ -73,7 +73,7 @@ namespace DomainRepository.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Country");
+                    b.ToTable("Countries");
                 });
 
             modelBuilder.Entity("DomainRepository.Models.Event", b =>
@@ -106,7 +106,7 @@ namespace DomainRepository.Migrations
 
                     b.HasIndex("JourneyId");
 
-                    b.ToTable("Event");
+                    b.ToTable("Events");
                 });
 
             modelBuilder.Entity("DomainRepository.Models.Expense", b =>
@@ -121,10 +121,12 @@ namespace DomainRepository.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Currency")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(3)
+                        .HasColumnType("nvarchar(3)");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<int?>("JourneyId")
                         .HasColumnType("int");
@@ -138,7 +140,7 @@ namespace DomainRepository.Migrations
 
                     b.HasIndex("JourneyId");
 
-                    b.ToTable("Expense");
+                    b.ToTable("Expenses");
                 });
 
             modelBuilder.Entity("DomainRepository.Models.ExpenseParticipation", b =>
@@ -158,7 +160,7 @@ namespace DomainRepository.Migrations
 
                     b.HasIndex("PayerId");
 
-                    b.ToTable("ExpenseParticipation");
+                    b.ToTable("ExpenseParticipations");
                 });
 
             modelBuilder.Entity("DomainRepository.Models.Journey", b =>
@@ -185,7 +187,7 @@ namespace DomainRepository.Migrations
 
                     b.HasIndex("ToId");
 
-                    b.ToTable("Journey");
+                    b.ToTable("Journeys");
                 });
 
             modelBuilder.Entity("DomainRepository.Models.JourneyParticipation", b =>
@@ -203,7 +205,41 @@ namespace DomainRepository.Migrations
 
                     b.HasIndex("JourneyId");
 
-                    b.ToTable("JourneyParticipation");
+                    b.ToTable("JourneyParticipations");
+                });
+
+            modelBuilder.Entity("DomainRepository.Models.Memory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("CreatorId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ImagePath")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int?>("JourneyId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime>("PostedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatorId");
+
+                    b.HasIndex("JourneyId");
+
+                    b.ToTable("Memories");
                 });
 
             modelBuilder.Entity("DomainRepository.Models.Reminder", b =>
@@ -238,7 +274,7 @@ namespace DomainRepository.Migrations
 
                     b.HasIndex("JourneyId");
 
-                    b.ToTable("Reminder");
+                    b.ToTable("Reminders");
                 });
 
             modelBuilder.Entity("DomainRepository.Models.User", b =>
@@ -285,7 +321,7 @@ namespace DomainRepository.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("User");
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("DomainRepository.Models.City", b =>
@@ -377,7 +413,7 @@ namespace DomainRepository.Migrations
             modelBuilder.Entity("DomainRepository.Models.JourneyParticipation", b =>
                 {
                     b.HasOne("DomainRepository.Models.Journey", "Journey")
-                        .WithMany()
+                        .WithMany("Participations")
                         .HasForeignKey("JourneyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -391,6 +427,21 @@ namespace DomainRepository.Migrations
                     b.Navigation("Journey");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("DomainRepository.Models.Memory", b =>
+                {
+                    b.HasOne("DomainRepository.Models.User", "Creator")
+                        .WithMany()
+                        .HasForeignKey("CreatorId");
+
+                    b.HasOne("DomainRepository.Models.Journey", "Journey")
+                        .WithMany()
+                        .HasForeignKey("JourneyId");
+
+                    b.Navigation("Creator");
+
+                    b.Navigation("Journey");
                 });
 
             modelBuilder.Entity("DomainRepository.Models.Reminder", b =>
@@ -459,6 +510,11 @@ namespace DomainRepository.Migrations
                 });
 
             modelBuilder.Entity("DomainRepository.Models.Expense", b =>
+                {
+                    b.Navigation("Participations");
+                });
+
+            modelBuilder.Entity("DomainRepository.Models.Journey", b =>
                 {
                     b.Navigation("Participations");
                 });

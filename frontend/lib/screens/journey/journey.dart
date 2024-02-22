@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/models/journey_participation.dart';
+import 'package:frontend/screens/journey/journey_details.dart';
 
 class JourneyWidget extends StatefulWidget {
   final JourneyParticipation journeyParticipation;
@@ -34,6 +35,13 @@ class _JourneyState extends State<JourneyWidget> {
             fontSize: 16.0,
           ),
         ),
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => JourneyDetails(
+                      journeyId: _journeyParticipation.journey.id)));
+        },
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -60,10 +68,6 @@ class _JourneyState extends State<JourneyWidget> {
             ),
           ],
         ),
-        onTap: () {
-          // Define the action when the ListTile is tapped
-          // For example, navigate to a detailed view of the journey
-        },
       ),
     );
   }

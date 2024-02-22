@@ -8,7 +8,7 @@
         public string ImagePath { get; set; }
         public DateTime PostedOn { get; set; }
 
-        public User Creator {  get; set; }
-        public Journey Journey { get; set; }
+        public virtual User Creator {  get; set; }
+        public virtual Journey Journey { get; set; }
     }
 }

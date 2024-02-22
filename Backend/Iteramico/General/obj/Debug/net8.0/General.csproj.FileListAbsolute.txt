@@ -12,3 +12,4 @@ C:\Users\vace_\Fax\MIS\Iteramico\Backend\Iteramico\General\obj\Debug\net8.0\refi
 C:\Users\vace_\Fax\MIS\Iteramico\Backend\Iteramico\General\obj\Debug\net8.0\General.pdb
 C:\Users\vace_\Fax\MIS\Iteramico\Backend\Iteramico\General\obj\Debug\net8.0\General.genruntimeconfig.cache
 C:\Users\vace_\Fax\MIS\Iteramico\Backend\Iteramico\General\obj\Debug\net8.0\ref\General.dll
+C:\Users\vace_\Fax\MIS\Iteramico\Backend\Iteramico\General\obj\Debug\net8.0\General.sourcelink.json

@@ -16,7 +16,7 @@ namespace DomainRepository.Configuration
 
             builder
                 .HasOne(e => e.Journey)
-                .WithMany();
+                .WithMany(j => j.Expenses);
 
             builder.Property(p => p.Description).HasMaxLength(100);
             builder.Property(p => p.Currency).HasMaxLength(3);

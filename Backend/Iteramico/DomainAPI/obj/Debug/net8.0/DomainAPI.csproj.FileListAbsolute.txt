@@ -142,3 +142,6 @@ C:\Users\vace_\Fax\MIS\Iteramico\Backend\Iteramico\DomainAPI\bin\Debug\net8.0\Do
 C:\Users\vace_\Fax\MIS\Iteramico\Backend\Iteramico\DomainAPI\bin\Debug\net8.0\DomainService.pdb
 C:\Users\vace_\Fax\MIS\Iteramico\Backend\Iteramico\DomainAPI\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.Internal.dll
 C:\Users\vace_\Fax\MIS\Iteramico\Backend\Iteramico\DomainAPI\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+C:\Users\vace_\Fax\MIS\Iteramico\Backend\Iteramico\DomainAPI\obj\Debug\net8.0\DomainAPI.sourcelink.json
+C:\Users\vace_\Fax\MIS\Iteramico\Backend\Iteramico\DomainAPI\bin\Debug\net8.0\Castle.Core.dll
+C:\Users\vace_\Fax\MIS\Iteramico\Backend\Iteramico\DomainAPI\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Proxies.dll

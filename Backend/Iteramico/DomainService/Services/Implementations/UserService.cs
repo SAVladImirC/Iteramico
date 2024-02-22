@@ -1,11 +1,11 @@
 ﻿using DomainRepository.Models;
 using DomainRepository.Repositories.Interfaces;
+using DomainService.Requests.User;
+using DomainService.Services.Interfaces;
 using General.Password;
 using General.Response;
-using UserManagementService.Requests.User;
-using UserManagementService.Services.Interfaces;
 
-namespace UserManagementService.Services.Implementations
+namespace DomainService.Services.Implementations
 {
     internal class UserService(IUserRepository userRepository) : IUserService
     {

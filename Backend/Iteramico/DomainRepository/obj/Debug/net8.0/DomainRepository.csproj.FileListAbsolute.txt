@@ -15,3 +15,4 @@ C:\Users\vace_\Fax\MIS\Iteramico\Backend\Iteramico\DomainRepository\obj\Debug\ne
 C:\Users\vace_\Fax\MIS\Iteramico\Backend\Iteramico\DomainRepository\bin\Debug\net8.0\General.dll
 C:\Users\vace_\Fax\MIS\Iteramico\Backend\Iteramico\DomainRepository\bin\Debug\net8.0\General.pdb
 C:\Users\vace_\Fax\MIS\Iteramico\Backend\Iteramico\DomainRepository\obj\Debug\net8.0\DomainRepository.csproj.CopyComplete
+C:\Users\vace_\Fax\MIS\Iteramico\Backend\Iteramico\DomainRepository\obj\Debug\net8.0\DomainRepository.sourcelink.json

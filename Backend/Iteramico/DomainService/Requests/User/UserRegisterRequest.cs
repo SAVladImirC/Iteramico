@@ -1,4 +1,4 @@
-﻿namespace UserManagementService.Requests.User
+﻿namespace DomainService.Requests.User
 {
 #nullable disable
     public class UserRegisterRequest

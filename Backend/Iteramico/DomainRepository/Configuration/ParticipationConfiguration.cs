@@ -16,7 +16,7 @@ namespace DomainRepository.Configuration
 
             builder
                 .HasOne(p => p.Journey)
-                .WithMany();
+                .WithMany(j => j.Participations);
         }
     }
 }
