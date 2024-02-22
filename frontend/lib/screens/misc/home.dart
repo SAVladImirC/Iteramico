@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/screens/journey/journey_list.dart';
+import 'package:frontend/screens/location.dart';
 import 'package:frontend/screens/user/my_profile_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -56,17 +57,21 @@ class _HomeScreenState extends State<HomeScreen> {
           padding: EdgeInsets.zero,
           children: <Widget>[
             const DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.blue,
-              ),
-              child: Text(
-                'Menu',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
+                decoration: BoxDecoration(
+                  color: Colors.blue,
                 ),
-              ),
-            ),
+                child: Column(
+                  children: [
+                    LocationInfoWidget(),
+                    Text(
+                      'Menu',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 24,
+                      ),
+                    ),
+                  ],
+                )),
             ListTile(
               leading: const Icon(Icons.airplanemode_active),
               enabled: true,

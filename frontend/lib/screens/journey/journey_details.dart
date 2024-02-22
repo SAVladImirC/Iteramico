@@ -44,6 +44,11 @@ class _JourneyDetailsState extends State<JourneyDetails> {
       selectedIcon: Icon(Icons.monetization_on),
       icon: Icon(Icons.monetization_on_outlined),
       label: 'Expenses',
+    ),
+    const NavigationDestination(
+      selectedIcon: Icon(Icons.people),
+      icon: Icon(Icons.people_outline),
+      label: 'Participants',
     )
   ];
 
@@ -65,7 +70,8 @@ class _JourneyDetailsState extends State<JourneyDetails> {
         MemoryList(memories: []),
         ReminderList(reminders: _journey?.reminders ?? []),
         EventList(events: _journey?.events ?? []),
-        ExpenseList(expenses: _journey?.expenses ?? [])
+        ExpenseList(expenses: _journey?.expenses ?? []),
+        Text("Participants")
       ];
     });
   }

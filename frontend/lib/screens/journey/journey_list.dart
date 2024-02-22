@@ -13,8 +13,7 @@ class JourneyListScreen extends StatefulWidget {
 }
 
 class _JourneyListScreenState extends State<JourneyListScreen> {
-  late List<JourneyParticipation> _journeyParticipations =
-      []; // List to hold journeys
+  late List<JourneyParticipation> _journeyParticipations = [];
 
   @override
   void initState() {
