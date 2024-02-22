@@ -33,6 +33,7 @@ namespace DomainRepository
             services.AddTransient<IMemoryRepository, MemoryRepository>();
             services.AddTransient<IEventRepository, EventRepository>();
             services.AddTransient<IJourneyParticipationRepository, JourneyParticipationRepository>();
+            services.AddTransient<IExpenseRepository, ExpenseRepository>();
 
             return services;
         }

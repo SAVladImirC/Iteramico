@@ -1,10 +1,7 @@
-﻿using Azure.Core;
-using DomainRepository.Models;
+﻿using DomainRepository.Models;
 using DomainRepository.Repositories.Interfaces;
 using DomainService.Requests.Event;
-using DomainService.Requests.Event;
 using DomainService.Services.Interfaces;
-using General.Request;
 using General.Response;
 
 namespace DomainService.Services.Implementations

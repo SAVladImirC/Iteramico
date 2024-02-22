@@ -13,6 +13,7 @@ namespace DomainService
             services.AddTransient<IReminderService, ReminderService>();
             services.AddTransient<IEventService, EventService>();
             services.AddTransient<IJourneyService, JourneyService>();
+            services.AddTransient<IExpenseService, ExpenseService>();
 
             return services;
         }
