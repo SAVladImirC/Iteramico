@@ -1,0 +1,15 @@
+C:\Users\vace_\Fax\MIS\Iteramico\Backend\Iteramico\General\bin\Release\net8.0\General.deps.json
+C:\Users\vace_\Fax\MIS\Iteramico\Backend\Iteramico\General\bin\Release\net8.0\General.runtimeconfig.json
+C:\Users\vace_\Fax\MIS\Iteramico\Backend\Iteramico\General\bin\Release\net8.0\General.dll
+C:\Users\vace_\Fax\MIS\Iteramico\Backend\Iteramico\General\bin\Release\net8.0\General.pdb
+C:\Users\vace_\Fax\MIS\Iteramico\Backend\Iteramico\General\obj\Release\net8.0\General.csproj.AssemblyReference.cache
+C:\Users\vace_\Fax\MIS\Iteramico\Backend\Iteramico\General\obj\Release\net8.0\General.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\vace_\Fax\MIS\Iteramico\Backend\Iteramico\General\obj\Release\net8.0\General.AssemblyInfoInputs.cache
+C:\Users\vace_\Fax\MIS\Iteramico\Backend\Iteramico\General\obj\Release\net8.0\General.AssemblyInfo.cs
+C:\Users\vace_\Fax\MIS\Iteramico\Backend\Iteramico\General\obj\Release\net8.0\General.csproj.CoreCompileInputs.cache
+C:\Users\vace_\Fax\MIS\Iteramico\Backend\Iteramico\General\obj\Release\net8.0\General.sourcelink.json
+C:\Users\vace_\Fax\MIS\Iteramico\Backend\Iteramico\General\obj\Release\net8.0\General.dll
+C:\Users\vace_\Fax\MIS\Iteramico\Backend\Iteramico\General\obj\Release\net8.0\refint\General.dll
+C:\Users\vace_\Fax\MIS\Iteramico\Backend\Iteramico\General\obj\Release\net8.0\General.pdb
+C:\Users\vace_\Fax\MIS\Iteramico\Backend\Iteramico\General\obj\Release\net8.0\General.genruntimeconfig.cache
+C:\Users\vace_\Fax\MIS\Iteramico\Backend\Iteramico\General\obj\Release\net8.0\ref\General.dll

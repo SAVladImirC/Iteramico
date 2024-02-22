@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/models/journey.dart';
 import 'package:frontend/screens/event/event_list.dart';
 import 'package:frontend/screens/expense/expense_list.dart';
+import 'package:frontend/screens/memory/memory_list.dart';
 import 'package:frontend/screens/reminder/reminder_list.dart';
 import 'package:frontend/services/di_registration.dart';
 import 'package:frontend/services/implementations/journey_service_impl.dart';
@@ -60,7 +61,7 @@ class _JourneyDetailsState extends State<JourneyDetails> {
     setState(() {
       _journey = response.data!;
       screens = [
-        Text("0"),
+        MemoryList(memories: []),
         ReminderList(reminders: _journey?.reminders ?? []),
         EventList(events: _journey?.events ?? []),
         ExpenseList(expenses: _journey?.expenses ?? [])

@@ -13,7 +13,7 @@ class JourneyServiceImpl implements JourneyService {
       int userId) async {
     try {
       var response = await http.get(
-          Uri.parse("https://10.0.2.2:7012/api/journey/by-user/$userId"),
+          Uri.parse("http://192.168.0.104:7012/api/journey/by-user/$userId"),
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
           });
@@ -49,7 +49,7 @@ class JourneyServiceImpl implements JourneyService {
   Future<Response<Journey>> getJourneyById(int id) async {
     try {
       var response = await http.get(
-          Uri.parse("https://10.0.2.2:7012/api/journey/by-id/$id"),
+          Uri.parse("http://192.168.0.104:7012/api/journey/by-id/$id"),
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
           });
