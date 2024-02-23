@@ -22,10 +22,10 @@ class _JourneyParticipantsListState extends State<JourneyParticipantsList> {
   @override
   void initState() {
     super.initState();
-    _fetchTravelBuddies();
+    _fetchTravelParticipants();
   }
 
-  Future<void> _fetchTravelBuddies() async {
+  Future<void> _fetchTravelParticipants() async {
     var response = await _userService
         .getAllJourneyParticipants(_journeyService.currentJourney.id);
     setState(() {
@@ -44,7 +44,7 @@ class _JourneyParticipantsListState extends State<JourneyParticipantsList> {
             builder: (BuildContext context) {
               return const AddParticipantDialog();
             },
-          ).then((value) => _fetchTravelBuddies());
+          ).then((value) => _fetchTravelParticipants());
         },
         child: const Icon(Icons.add),
       ),

@@ -7,9 +7,7 @@ import 'package:frontend/services/implementations/event_service_impl.dart';
 import 'package:frontend/services/implementations/journey_service_impl.dart';
 
 class EventList extends StatefulWidget {
-  final List<Event> events;
-
-  const EventList({super.key, required this.events});
+  const EventList({super.key});
 
   @override
   State<StatefulWidget> createState() => _EventListState();

@@ -7,9 +7,7 @@ import 'package:frontend/services/implementations/journey_service_impl.dart';
 import 'package:frontend/services/implementations/memory_service_impl.dart';
 
 class MemoryList extends StatefulWidget {
-  final List<Memory> memories;
-
-  const MemoryList({super.key, required this.memories});
+  const MemoryList({super.key});
 
   @override
   State<StatefulWidget> createState() => _MemoryListState();

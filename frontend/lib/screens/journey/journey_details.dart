@@ -68,11 +68,11 @@ class _JourneyDetailsState extends State<JourneyDetails> {
       _journey = response.data!;
       _journeyService.currentJourney = _journey!;
       screens = [
-        MemoryList(memories: []),
-        ReminderList(reminders: _journey?.reminders ?? []),
-        EventList(events: _journey?.events ?? []),
-        ExpenseList(expenses: _journey?.expenses ?? []),
-        JourneyParticipantsList()
+        const MemoryList(),
+        const ReminderList(),
+        const EventList(),
+        const ExpenseList(),
+        const JourneyParticipantsList()
       ];
     });
   }

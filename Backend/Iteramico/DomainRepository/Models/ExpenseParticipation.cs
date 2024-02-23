@@ -10,5 +10,7 @@
 
         public int? PayerId { get; set; }
         public virtual User? Payer { get; set; }
+
+        public decimal SubTotal { get; set; }
     }
 }

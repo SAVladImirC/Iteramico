@@ -7,9 +7,7 @@ import 'package:frontend/services/implementations/journey_service_impl.dart';
 import 'package:frontend/services/implementations/reminder_service_impl.dart';
 
 class ReminderList extends StatefulWidget {
-  final List<Reminder> reminders;
-
-  const ReminderList({super.key, required this.reminders});
+  const ReminderList({super.key});
 
   @override
   State<StatefulWidget> createState() => _ReminderListState();

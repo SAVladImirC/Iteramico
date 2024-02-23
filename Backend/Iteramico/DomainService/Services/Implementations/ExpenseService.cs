@@ -33,14 +33,12 @@ namespace DomainService.Services.Implementations
                     Description = request.Description,
                 });
 
-                expense = await _expenseRepository.Insert(expense);
-
                 foreach(int participantId in request.Participants)
                 {
                     User? participant = await _userRepository.FindSingle(u => u.Id == participantId);
                     if (participant == null) return new ErrorResponse<Expense>("ER100", message: "User does not exist");
 
-                    expenseParticipations.Add(new() { Expense = expense, Payer = creator, User = participant });
+                    expenseParticipations.Add(new() { Expense = expense, Payer = creator, User = participant, SubTotal = expense.Price / request.Participants.Count });
                 }
 
                 expense.Participations = expenseParticipations;
